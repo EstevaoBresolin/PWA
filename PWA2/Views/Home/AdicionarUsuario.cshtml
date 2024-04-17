@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Adicionar Usuario";
+}
+
+<div class="text-center">
+    <h1>Adicionar Usuarios</h1>
+</div>
+</<br />
+<form action="/Usuario/AdicionarUsuario" method="post" class="form">
+    <label>Nome</label>
+    <input type="text" name="nome" value="" placeholder="Digite seu nome" required/>
+
+    <label>Idade</label>
+    <input type="number" name="idade" value="" placeholder="Digite sua idade" required/>
+
+    <label>Celular</label>
+    <input type="number" name="celular" value="" placeholder="Digite sua idade" required/>
+
+    <input type="submit"  value="Salvar" />
+</form>
+<style>
+    .form{
+        display:flex;
+        flex-direction:column;
+        padding:1rem;
+        border:1px solid red; 
+       
+    }
+    input{
+        width:35%;
+    }
+</style>

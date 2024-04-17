@@ -1,0 +1,65 @@
+﻿@model List<PWA2.Models.Usuario>
+@{
+    ViewData["Title"] = "Página Inicial";
+}
+
+@if(Model != null && Model.Count > 0)
+{
+    <table>
+
+        <h1>Lista de Usuarios</h1>
+        
+         @foreach (var user in Model)
+         {
+         
+                <tr>
+                    <th>Nome: </th>
+                    <td>@user.Nome</td>
+                </tr>
+
+                <tr>
+                    <th>Idade: </th>
+                    <td>@user.Idade</td>
+                </tr>
+
+                <tr class="last">
+                    <th>Celular: </th>
+                    <td>@user.Celular</td>
+                </tr>
+                         
+         
+        } 
+        
+    </table>
+}
+else
+{
+    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AdicionarUsuario">Adicionar Usuario</a>
+}
+<style>
+    .container{
+        width: 100%;
+        display:flex;
+        justify-content:center;
+        align-items: center;
+    }
+    table{
+        padding: 1rem;
+        border: 1px solid black;
+        width:100%;
+    }
+    th{
+        font-size: 18px;
+        font-weight: bold;
+    }
+    tr{
+        padding-inline: 1rem;
+        display:flex;
+        justify-content:space-between;
+    }
+
+    .last{
+        border-bottom:1px solid black;
+        padding-bottom: 0.5rem;
+    }
+</style>
