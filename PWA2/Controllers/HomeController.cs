@@ -24,6 +24,58 @@ namespace PWA2.Controllers
             return View();
         }
 
+        public IActionResult Editar(int id)
+        {
+            if(id != 1) {
+                
+                var usuarios = Db.ObterUsuarioPorId(id);
+                
+                return View(usuarios);
+            }
+            else
+            {   
+                Console.WriteLine("O Usuário Administrador não pode ser editado");
+                return RedirectToAction("Index");
+            }
+        }
+
+        public  IActionResult Excluir(int id)
+        {
+            Console.WriteLine( Db.Excluir(id));
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Compras()
+        {
+            return View();
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Editar(Usuario usuario)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    
+                    Db.Editar(usuario);
+                    return RedirectToAction("Index", "Home");
+                }
+                catch (Exception)
+                {
+                    return RedirectToAction("Error", "Home");
+                }
+            }
+
+            return View(usuario);
+        }
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

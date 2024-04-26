@@ -32,7 +32,7 @@ var cultureInfo = new CultureInfo("pt-BR");
 CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
 CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
-Db.AdicionarUsuario(new Usuario { Nome = "João Pedro", Idade = 30, Celular = 123456789 });
-Db.AdicionarUsuario(new Usuario { Nome = "Maria Clara", Idade = 25, Celular = 987654321 });
+Db.AdicionarUsuario(new Usuario { Id = 1,  Nome = "Administrador", Idade = 999, Celular = 0000000000 });
+Db.AdicionarUsuario(new Usuario { Id = 2, Nome = "Maria Clara", Idade = 25, Celular = 987654321 });
 
 app.Run();

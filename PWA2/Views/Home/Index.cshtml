@@ -5,37 +5,54 @@
 
 @if(Model != null && Model.Count > 0)
 {
-    <table>
+    <section>
 
         <h1>Lista de Usuarios</h1>
-        
+        <ul>
          @foreach (var user in Model)
          {
-         
-                <tr>
-                    <th>Nome: </th>
-                    <td>@user.Nome</td>
-                </tr>
+            <li>
+                    <div>
+                        <h3>ID </h3>
+                        <p>@user.Id</p>
+                    </div>
 
-                <tr>
-                    <th>Idade: </th>
-                    <td>@user.Idade</td>
-                </tr>
+                    <div>
+                        <h3>Nome: </h3>
+                        <p>@user.Nome</p>
+                    </div>
 
-                <tr class="last">
-                    <th>Celular: </th>
-                    <td>@user.Celular</td>
-                </tr>
-                         
-         
-        } 
-        
-    </table>
+                    <div>
+                        <h3>Idade: </h3>
+                        <p>@user.Idade</p>
+                    </div>
+
+                    <div>
+                        <h3>Celular: </h3>
+                        <p>@user.Celular</p>
+                    </div>
+
+                    <div class="last">
+                        <h4>
+                            <a class="nav-link text-dark" asp-route-id="@user.Id" asp-action="Editar">Editar Usuario</a>
+                        </h4>
+                        <h4>
+                            <a class="nav-link text-dark" asp-route-id="@user.Id" asp-action="Excluir">Excluir</a>
+                        </h4>
+                    </div>
+
+            </li>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Compras">Compras</a>
+        }
+        </ul>
+    </section>
 }
 else
 {
     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AdicionarUsuario">Adicionar Usuario</a>
+   
 }
+    
 <style>
     .container{
         width: 100%;
@@ -43,16 +60,18 @@ else
         justify-content:center;
         align-items: center;
     }
-    table{
+    li{
         padding: 1rem;
         border: 1px solid black;
         width:100%;
+        heigth: 90%;
+        list-style-type: none;
     }
-    th{
+    h3{
         font-size: 18px;
         font-weight: bold;
     }
-    tr{
+    div{
         padding-inline: 1rem;
         display:flex;
         justify-content:space-between;
@@ -61,5 +80,9 @@ else
     .last{
         border-bottom:1px solid black;
         padding-bottom: 0.5rem;
+    }
+
+    p{
+       
     }
 </style>

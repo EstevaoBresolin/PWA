@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Compras";
+}
+
+<div class="text-center">
+    <h1>Compras</h1>
+</div>
+</
+<br />
+<form action="/Usuario/Compras" method="post" class="form">
+
+    <label>n1</label>
+    <input type="number" name="n1" value="" placeholder="Digite n1" required />
+
+    <label>n2</label>
+    <input type="number" name="n2" value="" placeholder="Digite n2" required />
+
+    <input type="type" name="n3" value="@ViewBag.n3" />
+
+    <input type="submit" value="Somar" />
+    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Voltar</a>
+</form>
+ 
+<style>
+    .form {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        border: 1px solid red;
+    }
+
+    input {
+        width: 35%;
+    }
+</style>

@@ -7,7 +7,14 @@
 
         public int Idade { get; set; }
 
-        public int Celular { get; set;}
+        public string Senha { get; set; }
+
+        public double Celular { get; set;}
+
+        public int Id { get; set; }
+
+        public int N1 { get; set; }
+        public int N2 { get; set; }
 
       
     }
