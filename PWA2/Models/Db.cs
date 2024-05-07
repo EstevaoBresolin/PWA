@@ -4,52 +4,48 @@ namespace PWA2.Models
 {
     public class Db
     {
-        private static List<Usuario> usuarios = new List<Usuario>();
+        private static List<GastosGenericos> gastosGenericos = new List<GastosGenericos>();
 
-        public static bool AdicionarUsuario(Usuario usuario)
+        public static bool AdicionarGasto(GastosGenericos _gastosGenericos)
         {
-            Console.WriteLine($"Usuario {usuario.Nome} foi adicionado com sucesso");
-            usuarios.Add(usuario);
+            Console.WriteLine($"Usuario {_gastosGenericos.Nome} foi adicionado com sucesso");
+            gastosGenericos.Add(_gastosGenericos);
+            
             return true;
         }
 
-        public static string Excluir(int Id)
-        {
-            if(Id != 1)
-            {
-                usuarios.RemoveAll(u => u.Id == Id);
-                return $"Usuario {Id} foi removido com sucesso";
-            }
-            else
-            {
-                return "O Administrador não pode ser removido";
-            }                  
+        public static string Excluir(int id)
+        {        
+             gastosGenericos.RemoveAll(u => u.Id == id);
+             return $"Usuario {id} foi removido com sucesso";                             
         }
 
-        public static List<Usuario> ObterUsuarios() { return usuarios; }
+        public static List<GastosGenericos> ObterGastos() { return gastosGenericos; }
 
-        public static Usuario ObterUsuarioPorId(int id)
+        public static GastosGenericos ObterGastosPorId(int id)
         {
-            Usuario user = new Usuario();
-            foreach (var usuario in usuarios)
+           
+            foreach (var gasto in gastosGenericos)
             {
-                if(usuario.Id == id)
+                if (gasto.Id == id)
                 {
-                    user = usuario;
+                    return gasto;
                 }
             }
-            return user;
+            return null;
         }
 
-        public static void Editar(Usuario usuario)
+
+
+        public static void Editar(GastosGenericos _gastosGenericos)
         {
-            Console.WriteLine($"O usuario {usuario.Nome} foi editado com sucesso");
-            var usuarioExistente = usuarios.FirstOrDefault(u => u.Id == usuario.Id);
-            if (usuarioExistente != null)
+            Console.WriteLine($"Gastos com  {_gastosGenericos.Nome} foi editado com sucesso");        
+
+            var gastoExistente = gastosGenericos.FirstOrDefault(u => u.Id == _gastosGenericos.Id);
+            if (gastoExistente != null)
             {
-                usuarioExistente.Nome = usuario.Nome;
-                usuarioExistente.Idade = usuario.Idade;
-                usuarioExistente.Celular = usuario.Celular;
+                gastoExistente.Nome = _gastosGenericos.Nome;
+                gastoExistente.Valor = _gastosGenericos.Valor;
             }
         }
     }

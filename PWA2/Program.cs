@@ -24,6 +24,8 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
@@ -32,7 +34,8 @@ var cultureInfo = new CultureInfo("pt-BR");
 CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
 CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
-Db.AdicionarUsuario(new Usuario { Id = 1,  Nome = "Administrador", Idade = 999, Celular = 0000000000 });
-Db.AdicionarUsuario(new Usuario { Id = 2, Nome = "Maria Clara", Idade = 25, Celular = 987654321 });
+Db.AdicionarGasto(new GastosGenericos (1,"Gasolina", 600));
+Db.AdicionarGasto(new GastosGenericos(2,"Internet", 100));
+Db.AdicionarGasto(new GastosGenericos(3,"Alimentacao", 300));
 
 app.Run();

@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Adicionar Gasto";
+}
+
+<div class="text-center">
+    <h1>Adicionar Gasto Genérico</h1>
+</div>
+</<br />
+<form action="/Home/AdicionarGasto" method="post" class="form">
+
+    <label>Nome</label>
+    <input type="text" name="Nome" value="" placeholder="Digite o gasto" required />
+
+    <label>Valor</label>
+    <input type="number" name="Valor" value="" placeholder="Digite o valor" required/>
+
+    <input type="submit"  value="Salvar" />
+    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Voltar</a>
+</form>
+
+<style>
+    .form{
+        display:flex;
+        flex-direction:column;
+        padding:1rem;
+        border:1px solid red; 
+       
+    }
+    input{
+        width:35%;
+    }
+</style>

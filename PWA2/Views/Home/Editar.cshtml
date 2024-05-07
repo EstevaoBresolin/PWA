@@ -10,13 +10,10 @@
 <form asp-action="Editar" asp-route-id="@Model.Id" method="post" class="form">
 
     <label>Nome</label>
-    <input type="text" name="Nome" value="@Model.Nome" placeholder="Digite seu nome" required />
+    <input type="text" name="Nome" value="@Model.Nome" placeholder="Digite o gasto" required />
 
     <label>Idade</label>
-    <input type="number" name="Idade" value="@Model.Idade" placeholder="Digite sua idade" required />
-
-    <label>Celular</label>
-    <input type="number" name="Celular" value="@Model.Celular" placeholder="Digite seu celular" required />
+    <input type="number" name="Valor" value="@Model.Valor" placeholder="Digite o valor" required />
 
     <input type="submit" value="Salvar" />
     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Voltar</a>

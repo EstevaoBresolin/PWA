@@ -1,4 +1,4 @@
-﻿@model List<PWA2.Models.Usuario>
+﻿@model List<PWA2.Models.GastosGenericos>
 @{
     ViewData["Title"] = "Página Inicial";
 }
@@ -7,64 +7,57 @@
 {
     <section>
 
-        <h1>Lista de Usuarios</h1>
-        <ul>
-         @foreach (var user in Model)
+        <h1>Gastos Genéricos</h1>
+        <ul class="aa">
+         @foreach (var gastos in Model)
          {
             <li>
                     <div>
-                        <h3>ID </h3>
-                        <p>@user.Id</p>
-                    </div>
+                        <span>@gastos.Nome : R$@gastos.Valor</span>
 
-                    <div>
-                        <h3>Nome: </h3>
-                        <p>@user.Nome</p>
-                    </div>
-
-                    <div>
-                        <h3>Idade: </h3>
-                        <p>@user.Idade</p>
-                    </div>
-
-                    <div>
-                        <h3>Celular: </h3>
-                        <p>@user.Celular</p>
-                    </div>
-
-                    <div class="last">
-                        <h4>
-                            <a class="nav-link text-dark" asp-route-id="@user.Id" asp-action="Editar">Editar Usuario</a>
-                        </h4>
-                        <h4>
-                            <a class="nav-link text-dark" asp-route-id="@user.Id" asp-action="Excluir">Excluir</a>
-                        </h4>
+                        <a class="nav-link text-dark" asp-route-id="@gastos.Id" asp-controller="Home" asp-action="Editar">Editar</a>
+                           
+                         <a class="nav-link text-dark" asp-route-id="@gastos.Id" asp-controller="Home" asp-action="Excluir">Excluir</a>
+                       
                     </div>
 
             </li>
-                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Compras">Compras</a>
         }
         </ul>
     </section>
+
+    <div class="text-center">
+        <h3>Total: R$@ViewBag.Total</h3>
+    </div>
 }
 else
 {
-    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AdicionarUsuario">Adicionar Usuario</a>
+    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AdicionarGasto">Adicionar Usuario</a>
    
 }
     
 <style>
+    span{
+        font-weight: bold;
+    }
     .container{
         width: 100%;
         display:flex;
         justify-content:center;
         align-items: center;
     }
+    .aa{
+        height: 68vh;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+       
+    }
     li{
         padding: 1rem;
         border: 1px solid black;
-        width:100%;
-        heigth: 90%;
+     
+
         list-style-type: none;
     }
     h3{
@@ -74,6 +67,7 @@ else
     div{
         padding-inline: 1rem;
         display:flex;
+        align-items: center;
         justify-content:space-between;
     }
 
@@ -82,7 +76,4 @@ else
         padding-bottom: 0.5rem;
     }
 
-    p{
-       
-    }
 </style>
