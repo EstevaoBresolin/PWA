@@ -11,12 +11,15 @@ namespace PWA2.Models
 
         public double Valor { get; set; }
 
+        public string Categoria { get; set; }
 
-        public GastosGenericos (int id,string Nome, double Valor)
+
+        public GastosGenericos (int id,string Nome, double Valor, string Categoria)
         {
             this.Id = id;
             this.Nome = Nome;
             this.Valor = Valor;
+            this.Categoria = Categoria;
         }
 
         public GastosGenericos()

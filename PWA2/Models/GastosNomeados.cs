@@ -13,6 +13,5 @@
         public double Alimentacao { get; set; }
 
         public double Investimentos { get; set; }
-
     }
 }

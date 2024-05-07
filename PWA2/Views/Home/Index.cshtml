@@ -13,7 +13,7 @@
          {
             <li>
                     <div>
-                        <span>@gastos.Nome : R$@gastos.Valor</span>
+                        <span>@gastos.Nome : R$@gastos.Valor Categoria @gastos.Categoria</span>
 
                         <a class="nav-link text-dark" asp-route-id="@gastos.Id" asp-controller="Home" asp-action="Editar">Editar</a>
                            
@@ -25,10 +25,40 @@
         }
         </ul>
     </section>
-
     <div class="text-center">
         <h3>Total: R$@ViewBag.Total</h3>
     </div>
+    <div class="categorias">
+        
+        <div class="text-center">
+            <h3>Educacao: R$@ViewBag.Educacao</h3>
+        </div>
+
+        <div class="text-center">
+            <h3>Casa: R$@ViewBag.Casa</h3>
+        </div>
+
+        <div class="text-center">
+            <h3>Saude: R$@ViewBag.Saude</h3>
+        </div>
+
+        <div class="text-center">
+            <h3>Lazer: R$@ViewBag.Lazer</h3>
+        </div>
+
+        <div class="text-center">
+            <h3>Alimentacao: R$@ViewBag.Alimentacao</h3>
+        </div>
+
+        <div class="text-center">
+            <h3>Investimentos: R$@ViewBag.Investimentos</h3>
+        </div>
+
+        <div class="text-center">
+            <h3>Outros: R$@ViewBag.Outros</h3>
+        </div>
+    </div>
+  
 }
 else
 {
@@ -37,6 +67,10 @@ else
 }
     
 <style>
+    .categorias{
+        display:flex;
+        column-gap:10px;
+    }
     span{
         font-weight: bold;
     }

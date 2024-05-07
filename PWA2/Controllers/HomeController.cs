@@ -17,26 +17,43 @@ namespace PWA2.Controllers
             _logger = logger;
         }
 
-        public double GastoTotal (List<GastosGenericos> gastos)
+        public IActionResult Index()
         {
-            Total = gastos.Sum(x => x.Valor);
-            return Total;
-        }
+            var gastosGenericos = Db.ObterGastos();
 
+
+            ViewBag.Total = GastoTotal(gastosGenericos);
+            ViewBag.Saldo = Saldo();
+            ViewBag.Outros = Db.Outros().Sum(g => g.Valor);
+            ViewBag.Educacao = Db.Educacao().Sum(g => g.Valor);
+            ViewBag.Casa = Db.Casa().Sum(g => g.Valor);
+            ViewBag.Saude = Db.Saude().Sum(g => g.Valor);
+            ViewBag.Lazer = Db.Lazer().Sum(g => g.Valor);
+            ViewBag.Alimentacao = Db.Alimentacao().Sum(g => g.Valor);
+            ViewBag.Investimentos = Db.Investimentos().Sum(g => g.Valor);
+
+
+            return View(gastosGenericos);
+        }
+       
+
+
+        //////////// OBTER VALORES /////////////////    
         public double Saldo ()
         {
             double saldo = 2000 - Total;
             return saldo;
         }
 
-        public IActionResult Index()
+        public double GastoTotal(List<GastosGenericos> gastos)
         {
-            var gastosGenericos = Db.ObterGastos();
-           
-            ViewBag.Total = GastoTotal(gastosGenericos);
-            ViewBag.Saldo = Saldo();
-            return View(gastosGenericos);
+            Total = gastos.Sum(x => x.Valor);
+            return Total;
         }
+
+        //////////// OBTER VALORES /////////////////
+       
+
 
         //////////// Adicionar Usuarios ///////////////
         public IActionResult AdicionarGasto()
@@ -47,13 +64,47 @@ namespace PWA2.Controllers
         [HttpPost]
         public IActionResult AdicionarGasto(GastosGenericos _gastosGenericos)
         {
-            Db.AdicionarGasto(_gastosGenericos);
+            string categoria = _gastosGenericos.Categoria;
+            switch (categoria)
+            {
+                case "Educacao":
+                    Db.Educacao(_gastosGenericos);
+                    break;
+
+                case "Casa":
+                    Db.Casa(_gastosGenericos);
+                    break;
+
+                case "Saude":
+                    Db.Saude(_gastosGenericos);
+                    break;
+
+                case "Lazer":
+                    Db.Lazer(_gastosGenericos);
+                    break;
+
+                case "Alimentacao":
+                    Db.Alimentacao(_gastosGenericos);
+                    break;
+
+                case "Investimentos":
+                    Db.Investimentos(_gastosGenericos);
+                    break;
+
+                case "Outros":
+                    Db.Outros(_gastosGenericos);
+                    break;
+            }
+            Console.WriteLine(_gastosGenericos.Categoria);
+            Db.Geral(_gastosGenericos);
             return RedirectToAction("Index", "Home");
         }
 
         //////////// Adicionar Usuarios ///////////////
+        
 
-        //////////// Editar Usuarios ///////////////
+
+        //////////// Editar Usuarios ///////////////        
 
         public IActionResult Editar(int id)
         {        
@@ -84,55 +135,14 @@ namespace PWA2.Controllers
         }
 
         //////////// Editar Usuarios ///////////////
+        
 
-        //////////// Login ///////////////
-       
+        
         public IActionResult Excluir(int id)
         {
             Db.Excluir(id);
             return RedirectToAction("Index", "Home");
         }
-        public IActionResult Login()
-        {
-            return View();
-        }
-
-        //public IActionResult Login(string nome, string senha)
-        //{
-        //    List<Usuario> usuarios = Db.ObterUsuarios();
-
-        //    Usuario usuarioAutenticado = usuarios.FirstOrDefault(u => u.Nome == nome && u.Senha == senha);
-
-        //    if (usuarioAutenticado != null)
-        //    {
-        //        return RedirectToAction("Index", "Home");
-        //    }
-        //    else
-        //    {
-        //        ViewBag.MensagemErro = "Usuário ou senha inválidos";
-        //        return RedirectToAction("Login", "Home");
-        //    }
-        //}
-
-        //////////// Login ///////////////
-
-        //////////// Excluir ///////////////
-
-        //public IActionResult Excluir(int id)
-        //{
-        //    Console.WriteLine(Db.Excluir(id));
-        //    return RedirectToAction("Index");
-        //}
-
-        //////////// Excluir ///////////////
-
-        [HttpPost]
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-  
+   
     }
 }

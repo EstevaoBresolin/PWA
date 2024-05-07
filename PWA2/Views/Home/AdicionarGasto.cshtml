@@ -12,7 +12,20 @@
     <input type="text" name="Nome" value="" placeholder="Digite o gasto" required />
 
     <label>Valor</label>
-    <input type="number" name="Valor" value="" placeholder="Digite o valor" required/>
+    <input type="number" name="Valor" value="" placeholder="Digite o valor" required/> 
+
+    <label>Qual o tipo de gasto</label>
+    <select name="Categoria" id="categoria">
+        <option  value="">Selecione uma categoria</option>
+        <option value="Educacao">Educacao</option>
+        <option value="Casa">Casa</option>
+        <option value="Saude">Saude</option>
+        <option value="Lazer">Lazer</option>
+        <option value="Alimentacao">Alimentacao</option>
+        <option value="Investimentos">Investimentos</option>
+        <option value="Outros">Outros</option>
+    </select>
+
 
     <input type="submit"  value="Salvar" />
     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Voltar</a>
@@ -30,3 +43,14 @@
         width:35%;
     }
 </style>
+
+<script>
+        document.getElementById('categoria').addEventListener('change', function () {
+            var categoriaSelecionada = this.value;
+            if (categoriaSelecionada === 'Educacao') {
+                console.log('Categoria "Educacao" selecionada');
+                alert(categoriaSelecionada)
+                // Aqui você pode adicionar lógica adicional, como enviar dados para o servidor
+            }
+        });
+</script>
