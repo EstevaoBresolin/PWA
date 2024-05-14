@@ -23,7 +23,6 @@ namespace PWA2.Controllers
         {
             var gastosGenericos = Db.ObterGastos();
 
-           
             ViewBag.Total = GastoTotal(gastosGenericos);
             ViewBag.Saldo = Saldo();
             ViewBag.Outros = Db.Outros().Sum(g => g.Valor);
@@ -36,6 +35,22 @@ namespace PWA2.Controllers
             ViewBag.Investimentos = Db.Investimentos().Sum(g => g.Valor);
             ViewBag.Orcamento = Db.ObterOrcamento();
 
+            Dictionary<string, double> totalPorCategoria = new Dictionary<string, double>();
+
+            foreach (var gasto in Db.Geral())
+            {
+                if (totalPorCategoria.ContainsKey(gasto.Categoria))
+                {
+                    totalPorCategoria[gasto.Categoria] += gasto.Valor;
+                    Console.WriteLine(gasto.Valor + gasto.Categoria + " valor,categoria");
+                }
+                else
+                {
+                    totalPorCategoria[gasto.Categoria] = gasto.Valor;
+                    Console.WriteLine(gasto.Valor + gasto.Categoria + " valor,categoria novo");
+                }
+            }
+            ViewBag.Categoria = totalPorCategoria;
             return View(gastosGenericos);
         }
        

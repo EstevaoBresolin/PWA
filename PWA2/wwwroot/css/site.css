@@ -1,5 +1,14 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
+    background: rgb(53 59 65);
+}
+
+body {
+    background: rgb(53 59 65);
+}
+
+header {
+    background: rgb(53 59 65);
 }
 
 @media (min-width: 768px) {

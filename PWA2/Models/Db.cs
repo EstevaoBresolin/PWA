@@ -17,13 +17,13 @@ namespace PWA2.Models
         private static List<GastosGenericos> transporte = new List<GastosGenericos>();
         private static double orcamento = new double();
 
-        private static int proximoId = 1;
-
        
+        private static int proximoId = 1;
 
 
         //////////////// LISTAS DE CATEGORIAS /////////////////////
 
+       
 
 
         /////////////// ADICIONAR CATEGORIAS /////////////////
@@ -111,6 +111,9 @@ namespace PWA2.Models
         public static List<GastosGenericos> Investimentos() { return investimentos; }
         public static List<GastosGenericos> Lazer() { return lazer; }
         public static List<GastosGenericos> Transporte() { return transporte; }
+
+        public static List<GastosGenericos> Geral() { return geral; }
+
 
         /////////// RETORNAR CATEGORIAS ///////////
 
