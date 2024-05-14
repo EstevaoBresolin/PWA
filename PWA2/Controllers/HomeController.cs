@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using PWA2.Models;
 using System.Diagnostics;
 using System.Numerics;
+using System.Security.Cryptography.X509Certificates;
 
 namespace PWA2.Controllers
 {
@@ -9,8 +10,9 @@ namespace PWA2.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        double Total {  get; set; }
+        double Total { get; set; }
 
+        double Orcamento { get; set; }
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -21,7 +23,7 @@ namespace PWA2.Controllers
         {
             var gastosGenericos = Db.ObterGastos();
 
-
+           
             ViewBag.Total = GastoTotal(gastosGenericos);
             ViewBag.Saldo = Saldo();
             ViewBag.Outros = Db.Outros().Sum(g => g.Valor);
@@ -29,9 +31,10 @@ namespace PWA2.Controllers
             ViewBag.Casa = Db.Casa().Sum(g => g.Valor);
             ViewBag.Saude = Db.Saude().Sum(g => g.Valor);
             ViewBag.Lazer = Db.Lazer().Sum(g => g.Valor);
+            ViewBag.Transporte = Db.Transporte().Sum(g => g.Valor);
             ViewBag.Alimentacao = Db.Alimentacao().Sum(g => g.Valor);
             ViewBag.Investimentos = Db.Investimentos().Sum(g => g.Valor);
-
+            ViewBag.Orcamento = Db.ObterOrcamento();
 
             return View(gastosGenericos);
         }
@@ -41,9 +44,11 @@ namespace PWA2.Controllers
         //////////// OBTER VALORES /////////////////    
         public double Saldo ()
         {
-            double saldo = 2000 - Total;
+            double saldo = Db.ObterOrcamento() - Total;
             return saldo;
         }
+
+      
 
         public double GastoTotal(List<GastosGenericos> gastos)
         {
@@ -55,7 +60,7 @@ namespace PWA2.Controllers
        
 
 
-        //////////// Adicionar Usuarios ///////////////
+        //////////// Adicionar Gastos ///////////////
         public IActionResult AdicionarGasto()
         {
             return View();
@@ -87,6 +92,10 @@ namespace PWA2.Controllers
                     Db.Alimentacao(_gastosGenericos);
                     break;
 
+                case "Transporte":
+                    Db.Transporte(_gastosGenericos);
+                    break;
+
                 case "Investimentos":
                     Db.Investimentos(_gastosGenericos);
                     break;
@@ -100,11 +109,20 @@ namespace PWA2.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //////////// Adicionar Usuarios ///////////////
-        
+        [HttpPost]
+        public IActionResult AdicionarOrcamento(int _orcamento)
+        {
+           Db.Orcamento(_orcamento);
+            return RedirectToAction("Index", "Home");
+        }
 
 
-        //////////// Editar Usuarios ///////////////        
+
+        //////////// Adicionar Gastos ///////////////
+
+
+
+        //////////// Editar gasto ///////////////        
 
         public IActionResult Editar(int id)
         {        
@@ -134,7 +152,7 @@ namespace PWA2.Controllers
             return View(gastosGenericos);
         }
 
-        //////////// Editar Usuarios ///////////////
+        //////////// Editar gasto ///////////////
         
 
         

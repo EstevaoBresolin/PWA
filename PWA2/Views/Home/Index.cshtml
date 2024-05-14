@@ -3,73 +3,145 @@
     ViewData["Title"] = "Página Inicial";
 }
 
+<div id="telaCheia">
+    <div id="modal">
+        <form action="/Home/AdicionarOrcamento" method="post" class="form">
+            <label>Qual seu orçamento mensal</label>
+            <input type="number" name="_orcamento" value="" placeholder="Digite o orçamento=" required />
+
+            <input type="submit" name="Salvar" value="Salvar" />
+        </form>
+    </div>
+</div>
+
 @if(Model != null && Model.Count > 0)
 {
-    <section>
+ <div class="section">
+        <section class="left">
 
-        <h1>Gastos Genéricos</h1>
-        <ul class="aa">
-         @foreach (var gastos in Model)
-         {
-            <li>
-                    <div>
-                        <span>@gastos.Nome : R$@gastos.Valor Categoria @gastos.Categoria</span>
+            <h1>Gastos Genéricos</h1>
+            <ul class="aa">
+                @foreach (var gastos in Model)
+                {
+                    <li>
+                        <div class="item">
+                            <span>@gastos.Nome : R$@gastos.Valor Categoria @gastos.Categoria</span>
 
-                        <a class="nav-link text-dark" asp-route-id="@gastos.Id" asp-controller="Home" asp-action="Editar">Editar</a>
-                           
-                         <a class="nav-link text-dark" asp-route-id="@gastos.Id" asp-controller="Home" asp-action="Excluir">Excluir</a>
-                       
-                    </div>
+                            <a class="nav-link text-dark" asp-route-id="@gastos.Id" asp-controller="Home" asp-action="Editar">Editar</a>
 
-            </li>
-        }
-        </ul>
-    </section>
-    <div class="text-center">
-        <h3>Total: R$@ViewBag.Total</h3>
+                            <a class="nav-link text-dark" asp-route-id="@gastos.Id" asp-controller="Home" asp-action="Excluir">Excluir</a>
+
+                        </div>
+
+                    </li>
+                }
+            </ul>
+            <canvas id="meuGrafico" width="400" height="400"></canvas>
+        </section>
+
+        <div class="rigth">
+            <div class="text-center category total">
+                <h3>Total: R$@ViewBag.Total</h3>
+            </div>
+            <div class="categorias">
+
+                <div class="text-center category">
+                    <h3>Educacao: R$@ViewBag.Educacao</h3>
+                </div>
+
+                <div class="text-center category">
+                    <h3>Casa: R$@ViewBag.Casa</h3>
+                </div>
+
+                <div class="text-center category">
+                    <h3>Saude: R$@ViewBag.Saude</h3>
+                </div>
+
+                <div class="text-center category">
+                    <h3>Lazer: R$@ViewBag.Lazer</h3>
+                </div>
+
+                <div class="text-center category">
+                    <h3>Alimentacao: R$@ViewBag.Alimentacao</h3>
+                </div>
+
+                <div class="text-center category">
+                    <h3>Transporte: R$@ViewBag.Transporte</h3>
+                </div>
+
+                <div class="text-center category">
+                    <h3>Investimentos: R$@ViewBag.Investimentos</h3>
+                </div>
+
+                <div class="text-center category">
+                    <h3>Outros: R$@ViewBag.Outros</h3>
+                </div>
+            </div>
+        </div>
+
     </div>
-    <div class="categorias">
-        
-        <div class="text-center">
-            <h3>Educacao: R$@ViewBag.Educacao</h3>
-        </div>
-
-        <div class="text-center">
-            <h3>Casa: R$@ViewBag.Casa</h3>
-        </div>
-
-        <div class="text-center">
-            <h3>Saude: R$@ViewBag.Saude</h3>
-        </div>
-
-        <div class="text-center">
-            <h3>Lazer: R$@ViewBag.Lazer</h3>
-        </div>
-
-        <div class="text-center">
-            <h3>Alimentacao: R$@ViewBag.Alimentacao</h3>
-        </div>
-
-        <div class="text-center">
-            <h3>Investimentos: R$@ViewBag.Investimentos</h3>
-        </div>
-
-        <div class="text-center">
-            <h3>Outros: R$@ViewBag.Outros</h3>
-        </div>
-    </div>
+   
   
 }
-else
-{
-    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AdicionarGasto">Adicionar Usuario</a>
-   
-}
+
+<script>
+    function atualizarPagina() {
+        // Atualiza a página após submeter o formulário
+        //location.reload();
+    }
+    function fecharModal() {
+        let telaCheia = document.getElementById("telaCheia");
+        telaCheia.style.display = "none";
+    }
+    function abrirModal() {
+        let telaCheia = document.getElementById("telaCheia");
+        telaCheia.style.display = "flex";
+    }
+</script>
+
+<style>
+    .section{
+        display:flex;
+        width: 90vw;
+    }
+    .left{
+        width:70%;
+    }
+    .rigth{
+        width:30%;
+    }
+    #telaCheia {
+        width: 100vw;
+        height: 100vh;
+        background: rgba(156, 156, 156, 0.59);
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #modal {
+        z-index: 1;
+        width: 40%;
+        height: 30%;
+        background: #fff;
+    }
+
+    .total{
+        margin-bottom:10px;
+    }
+</style>
     
 <style>
+    canvas{
+        height: 400px;
+        max-width:400px;
+        width: 400px;
+        max-height: 400px;
+    }
     .categorias{
         display:flex;
-        column-gap:10px;
+        flex-direction: column;
+        gap:10px;
     }
     span{
         font-weight: bold;
@@ -78,10 +150,11 @@ else
         width: 100%;
         display:flex;
         justify-content:center;
+        
         align-items: center;
     }
     .aa{
-        height: 68vh;
+        max-width: 60%;
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
@@ -98,16 +171,78 @@ else
         font-size: 18px;
         font-weight: bold;
     }
-    div{
+    .item{
         padding-inline: 1rem;
         display:flex;
         align-items: center;
         justify-content:space-between;
     }
-
+    .category{
+        padding: 1rem;
+        border: 1px solid black;
+    }
     .last{
         border-bottom:1px solid black;
         padding-bottom: 0.5rem;
     }
 
 </style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById('meuGrafico').getContext('2d');
+    var plugin = {
+        id: 'customCanvasBackgroundColor',
+        beforeDraw: (chart, args, options) => {
+            const { ctx } = chart;
+            ctx.save();
+            ctx.globalCompositeOperation = 'destination-over';
+            ctx.fillStyle = options.color || '#99ffff';
+            ctx.fillRect(0, 0, chart.width, chart.height);
+            ctx.restore();
+        }
+    };
+
+    var meuGrafico = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: [
+                'Educacao',
+                'Casa',
+                'Saude',
+                'Lazer',
+                'Alimentacao',
+                'Transporte',
+                'Investimentos',
+                'Outros'
+            ],
+            datasets: [{
+                label: 'Gastos por Categoria',
+                data: [@ViewBag.Educacao, @ViewBag.Casa, @ViewBag.Saude, @ViewBag.Lazer, @ViewBag.Alimentacao, @ViewBag.Transporte, @ViewBag.Investimentos, @ViewBag.Outros],
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)',
+                    'rgb(245, 125, 98)',
+                    'rgb(75, 192, 192)',
+                    'rgb(153, 102, 255)',
+                    'rgb(255, 159, 64)',
+                    'rgb(201, 203, 207)'
+                ],
+
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            plugins: {
+                customCanvasBackgroundColor: {
+                    color: '#fff',
+                }
+            }
+        },
+        plugins: [plugin],
+    });
+</script>
+
+
+

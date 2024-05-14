@@ -15,14 +15,21 @@ namespace PWA2.Models
         private static List<GastosGenericos> alimentacao = new List<GastosGenericos>();
         private static List<GastosGenericos> investimentos = new List<GastosGenericos>();
         private static List<GastosGenericos> transporte = new List<GastosGenericos>();
+        private static double orcamento = new double();
+
+        private static int proximoId = 1;
+
+       
+
 
         //////////////// LISTAS DE CATEGORIAS /////////////////////
- 
+
 
 
         /////////////// ADICIONAR CATEGORIAS /////////////////
         public static bool Geral(GastosGenericos _gastosGenericos)
         {
+            _gastosGenericos.Id = proximoId;
             Console.WriteLine($"Usuario {_gastosGenericos.Nome} foi adicionado com sucesso");
             geral.Add(_gastosGenericos);
 
@@ -30,6 +37,7 @@ namespace PWA2.Models
         }
         public static bool Outros(GastosGenericos _gastosGenericos)
         {
+            _gastosGenericos.Id = proximoId++;
             Console.WriteLine($"Usuario {_gastosGenericos.Nome} foi adicionado com sucesso");
             outros.Add(_gastosGenericos);
             
@@ -38,51 +46,63 @@ namespace PWA2.Models
 
         public static void Educacao(GastosGenericos _gastosGenericos)
         {
+            _gastosGenericos.Id = proximoId++;
             Console.WriteLine($"Usuario {_gastosGenericos.Nome} foi adicionado com sucesso");
             educacao.Add(_gastosGenericos);          
         }
 
         public static void Casa(GastosGenericos _gastosGenericos)
         {
+            _gastosGenericos.Id = proximoId++;
             Console.WriteLine($"Usuario {_gastosGenericos.Nome} foi adicionado com sucesso");
             casa.Add(_gastosGenericos);
         }
 
         public static void Saude(GastosGenericos _gastosGenericos)
         {
+            _gastosGenericos.Id = proximoId++;
             Console.WriteLine($"Usuario {_gastosGenericos.Nome} foi adicionado com sucesso");
             saude.Add(_gastosGenericos);
         }
 
         public static void Lazer(GastosGenericos _gastosGenericos)
         {
+            _gastosGenericos.Id = proximoId++;
             Console.WriteLine($"Usuario {_gastosGenericos.Nome} foi adicionado com sucesso");
             lazer.Add(_gastosGenericos);
         }
 
         public static void Alimentacao(GastosGenericos _gastosGenericos)
         {
+            _gastosGenericos.Id = proximoId++;
             Console.WriteLine($"Usuario {_gastosGenericos.Nome} foi adicionado com sucesso");
             alimentacao.Add(_gastosGenericos);
         }
 
         public static void Investimentos(GastosGenericos _gastosGenericos)
         {
+            _gastosGenericos.Id = proximoId++;
             Console.WriteLine($"Usuario {_gastosGenericos.Nome} foi adicionado com sucesso");
             investimentos.Add(_gastosGenericos);
         }
         public static void Transporte(GastosGenericos _gastosGenericos)
         {
+            _gastosGenericos.Id = proximoId++;
             Console.WriteLine($"Usuario {_gastosGenericos.Nome} foi adicionado com sucesso");
             transporte.Add(_gastosGenericos);
         }
 
+        public static void Orcamento(double _orcamento)
+        {
+            orcamento = _orcamento;
+        }
+
         /////////////// ADICIONAR CATEGORIAS /////////////////
-      
+
 
 
         /////////// RETORNAR CATEGORIAS ///////////
-        
+
         public static List<GastosGenericos> Outros() { return outros; }
         public static List<GastosGenericos> Educacao() { return educacao; }
         public static List<GastosGenericos> Casa() { return casa; }
@@ -110,10 +130,20 @@ namespace PWA2.Models
         public static string Excluir(int id)
         {
             geral.RemoveAll(u => u.Id == id);
+            outros.RemoveAll(u => u.Id == id);
+            educacao.RemoveAll(u => u.Id == id);
+            casa.RemoveAll(u => u.Id == id);
+            saude.RemoveAll(u => u.Id == id);
+            alimentacao.RemoveAll(u => u.Id == id);
+            investimentos.RemoveAll(u => u.Id == id);
+            lazer.RemoveAll(u => u.Id == id);
+            transporte.RemoveAll(u => u.Id == id);
             return $"Usuario {id} foi removido com sucesso";
         }
 
         public static List<GastosGenericos> ObterGastos() { return geral; }
+
+        public static double ObterOrcamento() { return orcamento; }
 
         public static void Editar(GastosGenericos _gastosGenericos)
         {
@@ -127,5 +157,6 @@ namespace PWA2.Models
                 gastoExistente.Categoria = _gastosGenericos.Categoria;
             }
         }
+
     }
 }

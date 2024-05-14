@@ -34,9 +34,9 @@ var cultureInfo = new CultureInfo("pt-BR");
 CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
 CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
-Db.Geral(new GastosGenericos (1,"Gasolina", 600, "Educacao"));
-Db.Geral(new GastosGenericos(2,"Internet", 100, "Lazer"));
-Db.Geral(new GastosGenericos(3,"Alimentacao", 300, "Casa"));
+//Db.Geral(new GastosGenericos (1,"Gasolina", 600, "Educacao"));
+//Db.Geral(new GastosGenericos(2,"Internet", 100, "Lazer"));
+//Db.Geral(new GastosGenericos(3,"Alimentacao", 300, "Casa"));
 
 
 
