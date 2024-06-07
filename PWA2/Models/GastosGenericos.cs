@@ -13,13 +13,16 @@ namespace PWA2.Models
 
         public string Categoria { get; set; }
 
+        public DateTime Data { get; set; }
 
-        public GastosGenericos (int id,string Nome, double Valor, string Categoria)
+
+        public GastosGenericos (int id,string Nome, double Valor, string Categoria, DateTime Data)
         {
             this.Id = id;
             this.Nome = Nome;
             this.Valor = Valor;
             this.Categoria = Categoria;
+            this.Data = Data;
         }
 
         public GastosGenericos()
